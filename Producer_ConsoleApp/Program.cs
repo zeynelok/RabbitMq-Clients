@@ -31,7 +31,7 @@ static IHostBuilder CreateDefaultBuilder()
             var configuration = new ConfigurationBuilder()
             .AddJsonFile(AppDomain.CurrentDomain.BaseDirectory + "appsettings.json", false).Build();
 
-            services.Configure<RabbitMqOptons>(configuration.GetSection("RabbitMqOptions"));
+            services.Configure<RabbitMqOptions>(configuration.GetSection("RabbitMqOptions"));
             services.AddSingleton<Publisher>();
         });
 }

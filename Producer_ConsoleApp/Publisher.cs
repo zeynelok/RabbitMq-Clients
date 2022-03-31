@@ -7,10 +7,10 @@ namespace Producer_ConsoleApp
 {
     public class Publisher
     {
-        private readonly RabbitMqOptons _rabbitOptons;
+        private readonly RabbitMqOptions _rabbitOptons;
         IConnection _connection;
         IModel _channel;
-        public Publisher(IOptions<RabbitMqOptons> options)
+        public Publisher(IOptions<RabbitMqOptions> options)
         {
             _rabbitOptons = options.Value;
         }

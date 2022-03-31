@@ -12,11 +12,11 @@ namespace Consumer_ConsoleApp
 {
     internal class Subscriber
     {
-        private readonly RabbitMqOptons _rabbitMqOptons;
+        private readonly RabbitMqOptions _rabbitMqOptons;
         IConnection _connection;
         IModel _channel;
 
-        public Subscriber(IOptions<RabbitMqOptons> options)
+        public Subscriber(IOptions<RabbitMqOptions> options)
         {
             _rabbitMqOptons = options.Value;
         }

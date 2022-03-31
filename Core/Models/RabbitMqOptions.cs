@@ -1,6 +1,6 @@
 ﻿namespace Core.Models
 {
-    public class RabbitMqOptons
+    public class RabbitMqOptions
     {
         public string Host { get; set; }
         public string User { get; set; }
