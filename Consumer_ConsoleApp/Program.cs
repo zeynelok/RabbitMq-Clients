@@ -5,10 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using StackExchange.Redis;
 
 try
 {
-   
+
     var host = CreateDefaultBuilder().Build();
     var serviceScope = host.Services.CreateScope();
     var provider = serviceScope.ServiceProvider;
@@ -33,9 +34,15 @@ static IHostBuilder CreateDefaultBuilder()
             .AddJsonFile(AppDomain.CurrentDomain.BaseDirectory + "appsettings.json", false).Build();
 
             services.Configure<RabbitMqOptions>(configuration.GetSection("RabbitMqOptions"));
+          
             services.AddSingleton<Subscriber>();
+            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(new ConfigurationOptions() {
+                EndPoints = { configuration.GetSection("RedisOptions:Endpoint").Value },
+               Password=configuration.GetSection("RedisOptions:Password").Value
+
+            }));
         })
-        .ConfigureLogging(builder=>
+        .ConfigureLogging(builder =>
         builder
         .AddFilter("System", LogLevel.Warning)
         .AddFilter("Microsoft", LogLevel.Warning));
